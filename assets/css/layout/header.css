@@ -1,0 +1,56 @@
+/* 
+ * Block 
+ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--base-spacing);
+  margin: 0;
+  background-color: var(--base-accent-color);
+  color: var(--tertiary-font-color);
+}
+
+
+/* 
+ * Elements 
+ */
+
+.header__title {
+  margin: 0;
+  font-size: var(--smedium-font-size);
+}
+
+.header__nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.header__nav-item a {
+  margin-left: calc(var(--base-spacing) * 1.5);
+  text-decoration: none;
+  color: var(--tertiary-font-color);
+  opacity: 0.5;
+}
+
+
+/* 
+ * States 
+ */
+
+.header__nav-item a.active {
+  color: var(--tertiary-font-color);
+  opacity: 1;
+}
+
+.header__nav-item a:hover {
+  text-decoration: underline;
+}

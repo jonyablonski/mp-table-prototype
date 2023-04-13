@@ -1,0 +1,20 @@
+/* 
+ * Block 
+ */
+
+.util {
+  position: fixed;
+  margin: var(--base-spacing);
+  padding: var(--base-spacing);
+  bottom: 0;
+  left: var(--sidebar-width);
+  right: 0;
+  background-color: var(--tertiary-background-color);
+  border-radius: var(--base-border-radius);
+}
+
+
+/* 
+ * Elements 
+ */
+

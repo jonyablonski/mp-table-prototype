@@ -1,0 +1,118 @@
+:root {
+
+
+  /* Colors */
+  --gray0: #fff;
+  --gray1: #f6f6f6;
+  --gray2: #e9e9e9;
+  --gray3: #8f8f91;
+  --gray4: #626266;
+  --gray5: #2a2a2f;
+  --gray0-rgb: 255,255,255;
+  --gray1-rgb: 246,246,246;
+  --gray2-rgb: 233,233,233;
+  --gray3-rgb: 143,143,145;
+  --gray4-rgb: 98,98,102;
+  --gray5-rgb: 42,42,47;
+  --blue0: #DCDAF9;
+  --blue1: #4f44e0;
+  --blue2: #463dbb;
+  --blue3: #322e6f;
+  --green1: #219464;
+  --green2: #217d57;
+  --green3: #204e3e;
+  --red1: #e34f2f;
+  --red2: #bc452d;
+  --red3: #6d3228;
+  --orange1: #df7800;
+  --orange2: #b96607;
+  --orange3: #6c4316;
+  --blue1-rgb: 79,68,224;
+  --blue2-rgb: 70,61,187;
+  --blue3-rgb: 50,46,111;
+  --green1-rgb: 33,148,100;
+  --green2-rgb: 33,125,87;
+  --green3-rgb: 32,78,62;
+  --red1-rgb: 227,79,47;
+  --red2-rgb: 188,69,45;
+  --red3-rgb: 109,50,40;
+  --orange1-rgb: 223,120,0;
+  --orange2-rgb: 185,102,7;
+  --orange3-rgb: 108,67,22;
+
+
+  /* Links */
+  --base-accent-color: var(--blue1);
+  --hover-link-color: var(--blue2);
+
+
+  /* Selected text */
+  --base-selection-color: var(--quarternary-background-color);
+
+  
+  /* Background */
+  --base-background-color: var(--gray0);
+  --secondary-background-color: var(--gray1);
+  --tertiary-background-color: var(--gray2);
+  --quarternary-background-color: var(--blue0);
+
+
+  /* Font Sizes (3:4 / Perfect Forth) */
+  /* https://www.modularscale.com/?1&em&1.333 */
+  --xsmall-font-size: 0.563em;
+  --small-font-size: 0.75em;
+  --base-font-size: 1em;
+  --smedium-font-size: 1.333em;
+  --medium-font-size: 1.777em;
+  --large-font-size: 2.369em;
+  --xlarge-font-size: 3.157em;
+
+
+  /* Text Settings */
+  --base-font-family: 'Apercu Pro', Helvetica, sans-serif;
+  --secondary-font-family: Consolas, monaco, monospace;
+  --base-font-color: var(--gray5);
+  --secondary-font-color: var(--gray3);
+  --tertiary-font-color: var(--gray0);
+  --base-line-height: 1.4;
+  --header-line-height: 1.2;
+
+
+  /* Animation Settings */
+  --base-duration: .3s;
+  --base-timing: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+
+
+  /* Borders */
+  --base-border-color: var(--gray2);
+  --base-border: 1px solid var(--base-border-color);
+  --base-focus: 2px thin dotted var(--base-font-color);
+  --base-border-radius: .6em;
+  --secondary-border-radius: .3em;
+
+
+  /* Box Shadows */
+  --base-box-shadow: 0 1px 2px 0px rgba(0,0,0,.25);
+  --hover-box-shadow: 0 2px 10px 1px rgba(0,0,0,.5);
+
+
+  /* Spacing */
+  --base-spacing: 1rem;
+  --grid-gap: 32px;
+  --grid-margin-block: calc(var(--base-spacing) * 2);
+  --grid-margin-inline: calc(var(--base-spacing) * 6);
+
+
+  /* Layout */
+  --header-height: 4rem;
+  --sidebar-width: 256px;
+
+
+  /* Tables */
+  --table-cell-height: 40px;
+
+
+  /* Buttons */
+  --icon-button-size: 32px;
+
+}

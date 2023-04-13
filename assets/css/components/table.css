@@ -1,0 +1,86 @@
+/* 
+ * Block 
+ */
+
+.table {
+  display: grid;
+  grid-template-columns: minmax(max-content, 10vw) 1fr;
+}
+
+
+/*
+ * Elements 
+ */
+
+.table__col {
+	position: relative;
+}
+
+.table__col .table__cell:not(:only-child) {
+	border-bottom: var(--base-border);
+}
+
+.table__col-header,
+.table__cell {
+	padding: 0 calc(var(--base-spacing) / 2);
+}
+
+.table__col-header {
+	border-bottom: var(--base-border);
+}
+
+.table__col-drag {
+	display: none;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	height: calc(100% - var(--table-cell-height));
+	width: 1px;
+	background-color: var(--base-border-color);
+	cursor: move;
+	transition: background-color var(--base-duration) var(--base-timing);
+}
+
+.table__col-drag:hover {
+	background-color: var(--hover-link-color);
+}
+
+.table__col:not(:last-child) .table__col-drag {
+	display: block;
+}
+
+.table__cell {
+	height: var(--table-cell-height);
+	line-height: var(--table-cell-height);
+}
+
+.table__title {
+	margin: 0 0 calc(var(--base-spacing) / 3);
+}
+
+.table__title span {
+	display: inline-block;
+	margin-right: calc(var(--base-spacing) / 6);
+	color: var(--secondary-font-color);
+}
+
+.table__meta,
+.table__meta a {
+	margin: 0;
+	color: var(--secondary-font-color);
+	text-decoration: none;
+}
+
+
+/*
+ * Modifiers 
+ */
+
+.table__col--metric {
+	text-align: right;
+}
+
+.table__col--segment:not(:first-child) .table__col-footer {
+	display: none;
+}

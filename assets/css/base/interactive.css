@@ -1,0 +1,71 @@
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+
+/*
+ * Text links
+ */
+
+a {
+  background-color: transparent;
+  color: var(--base-accent-color);
+  text-decoration: underline;
+  transition: color var(--base-duration) var(--base-timing);
+}
+
+a:active,
+a:focus {
+  color: var(--base-accent-color);
+}
+
+a:hover {
+  color: var(--hover-link-color);
+}
+
+a:focus {
+  outline: var(--base-focus);
+  outline-offset: 0.125em;
+}
+
+
+/*
+  This will hide the focus indicator if the element receives focus via the mouse,
+  but it will still show up on keyboard focus.
+*/
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Vendor-prefixed and regular ::selection selectors cannot be combined:
+ * https://stackoverflow.com/a/16982510/7133471
+ *
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+  background: var(--base-selection-color);
+  text-shadow: none;
+}
+
+::selection {
+  background: var(--base-selection-color);
+  text-shadow: none;
+}

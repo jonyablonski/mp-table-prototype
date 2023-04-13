@@ -1,0 +1,22 @@
+h1,
+h2,
+h3 {
+  margin-top: 0;
+  line-height: var(--header-line-height);
+}
+
+h1 {
+  font-size: var(--medium-font-size);
+}
+
+h2 {
+  font-size: var(--smedium-font-size);
+}
+
+h3 {
+  font-size: var(--base-font-size);
+}
+
+p {
+  margin: 0 0 var(--base-spacing);
+}

@@ -1,0 +1,47 @@
+/* 
+ * Block 
+ */
+
+.grid {
+  margin: var(--grid-margin-block) var(--grid-margin-inline);
+}
+
+
+/* 
+ * Elements 
+ */
+
+.grid__row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(1fr);
+  align-content: start;
+  grid-column-gap: var(--grid-gap);
+  min-height: min-content;
+  margin-bottom: var(--grid-gap);
+}
+
+.grid__header {
+  min-height: 2rem;
+  grid-column: 1 / -1;
+  cursor: text;
+}
+
+.grid__header:focus {
+  outline: none;
+}
+
+.grid__header::before {
+  content: attr(data-placeholder);
+  position: absolute;
+  color: var(--secondary-font-color);
+}
+
+
+/* 
+ * States 
+ */
+
+.grid__header.is-active::before {
+  display: none;
+}

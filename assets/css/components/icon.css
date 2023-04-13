@@ -1,0 +1,14 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor;
+  pointer-events: none;
+}
+
+.icon--left {
+  margin-right: calc(var(--base-spacing) / 3);
+}
+
+.icon--right {
+  margin-left: calc(var(--base-spacing) / 3);
+}

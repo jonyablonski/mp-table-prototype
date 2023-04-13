@@ -1,0 +1,84 @@
+/* 
+ * Block 
+ */
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  line-height: normal;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  font-size: 100%;
+  padding: calc(var(--base-spacing) / 2);
+  color: var(--base-font-color);
+  border: transparent;
+  background: var(--secondary-background-color);
+  box-shadow: var(--base-box-shadow);
+  text-decoration: none;
+  border-radius: var(--base-border-radius);
+  overflow: hidden;
+  transition: all var(--base-duration) var(--base-timing);
+}
+
+
+
+/* 
+ * Modifiers 
+ */
+
+.button--icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--icon-button-size);
+  height: var(--icon-button-size);
+  padding: 0;
+  box-shadow: none;
+  color: var(--secondary-font-color);
+  background: none;
+  transition: background-color var(--base-duration) var(--base-timing);
+}
+
+.button--text {
+  padding: var(--base-spacing);
+  background: none;
+  box-shadow: none;
+  border-radius: var(--base-border-radius);
+}
+
+.button--circle {
+  border-radius: 50%;
+}
+
+.button--toggle {
+  width: 100%;
+}
+
+.button--toggle svg:last-child {
+  margin-left: auto;
+}
+
+.button--drag {
+  cursor: grab;
+}
+
+
+/* 
+ * States 
+ */
+
+.button:hover {
+  color: var(--hover-link-color);
+  background-color: var(--quarternary-background-color);
+}
+
+.button--icon:hover {
+  fill: currentColor;
+}
+
+.button.is-active {
+  color: var(--base-link-color);
+}

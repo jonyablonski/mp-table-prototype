@@ -1,0 +1,21 @@
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+
+main {
+  display: block;
+}
+
+section {
+  margin: 0 0 calc(var(--base-spacing) * 4);
+}

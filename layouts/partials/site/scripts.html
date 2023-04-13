@@ -1,0 +1,4 @@
+{{ $utils := resources.Get "js/utils.js" }}
+{{ $app := resources.Get "js/app.js" }}
+{{ $scripts := slice $utils $app | resources.Concat "js/bundle.js" }}
+<script src="{{ $scripts.Permalink }}" integrity="{{ $scripts.Data.Integrity }}" media="screen"></script>

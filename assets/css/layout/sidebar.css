@@ -1,0 +1,5 @@
+.sidebar {
+  padding-top: var(--header-height);
+  height: 100%;
+  background-color: var(--secondary-background-color);
+}

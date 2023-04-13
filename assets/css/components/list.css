@@ -1,0 +1,59 @@
+/* 
+ * Block 
+ */
+
+.list {
+  margin: 0;
+  list-style: none;
+}
+
+.list:not(:last-child) {
+  margin-bottom: var(--base-spacing);
+  padding-bottom: var(--base-spacing);
+  border-bottom: var(--base-border);
+}
+
+
+/*
+ * Elements 
+ */
+
+.list__item-header {
+  margin: 0 0 calc(var(--base-spacing) / 3);
+  color: var(--secondary-font-color);
+}
+
+.list__item > * {
+  width: 100%;
+}
+
+
+/* 
+ * Modifiers 
+ */
+
+.list__item--divider::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-top: calc(calc(var(--base-spacing) / 2) * -1);
+  border-top: var(--base-border);
+}
+
+
+ /* 
+ * States 
+ */
+
+.list__item--divider:hover::before {
+  border-top: 1px solid transparent;
+}
+
+.list__item.is-inactive {
+  opacity: 0.5;
+}
+
+.list__item.is-active {
+  opacity: 1;
+}
