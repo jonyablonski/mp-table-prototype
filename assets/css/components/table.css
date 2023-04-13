@@ -37,7 +37,7 @@
 	top: 0;
 	right: 0;
 	height: calc(100% - var(--table-cell-height));
-	width: 1px;
+	width: 2px;
 	background-color: var(--base-border-color);
 	cursor: move;
 	transition: background-color var(--base-duration) var(--base-timing);
@@ -92,3 +92,7 @@
  */
 
 .table.is-overflow {}
+
+.table.is-resizing * {
+	user-select: none;
+}

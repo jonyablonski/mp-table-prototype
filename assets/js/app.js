@@ -12,7 +12,6 @@
   let metrics = document.querySelectorAll('[data-metric]');
 
 
-
   /**
    * Variables
    */
@@ -30,10 +29,6 @@
 
   let activeClass = 'is-active';
   let inactiveClass = 'is-inactive';
-  let rowStartClass = 'row-start';
-  let dragClass = 'is-dragging';
-  let dragHoverClass = 'is-dragHovered';
-  let hasDragChild = 'is-dragActive';
 
 
   /**
@@ -86,12 +81,20 @@
     orgWidth = target.offsetWidth;
     orgMouseX = e.pageX;
 
+    // Update resizing state on table
+    table.classList.add('is-resizing');
+
     // Resize column
     document.addEventListener('mousemove', resizeCol, false);
     
-    // Remove event listener
+    // Resizing end
     document.addEventListener('mouseup', function() {
+
+      // Remove event listener
       document.removeEventListener('mousemove', resizeCol, false);
+
+      // Update resizing state on table
+      table.classList.remove('is-resizing');
     }, false);
   }
 
