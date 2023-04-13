@@ -19,6 +19,9 @@
 
   let segmentDefault = 'minmax(max-content, 10vw) ';
   let metricDefault = '1fr ';
+  let target;
+  let orgWidth;
+  let orgMouseX;
 
 
   /**
@@ -67,32 +70,47 @@
   // Handle mousedown events globally
   const mousedownEventHandler = (e) => {
 
-    // Table Drag Events
+    // Column drag handle
     if (e.target.matches('[data-drag-handle]')) {
-      resizeElem(e)
+      initColResize(e);
     }
-
   }
 
-  const resizeElem = (e) => {
+  // Initize column resizing
+  const initColResize = (e) => {
 
-    // Get elements
-    let handle = e.target;
-    let target = handle.parentNode;
+    // Store target
+    target = getClosest(e.target, '[data-col]');
 
-    // Get initial values
-    let orgMouseX = handle.getBoundingClientRect().left;
-    let orgTargetWidth = target.offsetWidth;
+    // Get target values
+    orgWidth = target.offsetWidth;
+    orgMouseX = e.pageX;
 
-    // Listen for drag event on handle 
-    document.addEventListener('mousemove', function(e) {
-      let resizeDiff = Math.round(Math.abs(orgMouseX - e.pageX));
-      target.style.width = orgTargetWidth + resizeDiff + 'px';
+    // Resize column
+    document.addEventListener('mousemove', resizeCol, false);
+    
+    // Remove event listener
+    document.addEventListener('mouseup', function() {
+      document.removeEventListener('mousemove', resizeCol, false);
     }, false);
+  }
 
-    document.addEventListener('mouseup', function(e) {
-      
-    }, false);
+  // Resize Column
+  const resizeCol = (e) => {
+    
+    // Calculate new width
+    let width = parseInt(orgWidth + (e.pageX - orgMouseX), 10) + 'px';
+    
+    // Apply new width
+    target.style.width = width;
+    
+    // Check for table overflow
+    checkTableOverflow();
+  }
+
+  // Check when table is overflowing container
+  const checkTableOverflow = () => {
+    table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
   }
 
   // Add new segment
@@ -111,6 +129,9 @@
     // Update table settings
     let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
     table.style.gridTemplateColumns = gridConfig;
+
+    // Check for table overflow
+    checkTableOverflow();
   }
 
   // Remove last segment
@@ -131,6 +152,9 @@
     // Update table settings
     let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
     table.style.gridTemplateColumns = gridConfig;
+
+    // Check for table overflow
+    checkTableOverflow();
   }
 
   // Add new metric
@@ -149,6 +173,9 @@
     // Update table settings
     let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
     table.style.gridTemplateColumns = gridConfig;
+
+    // Check for table overflow
+    checkTableOverflow();
   }
 
   // Remove last metric
@@ -169,6 +196,9 @@
     // Update table settings
     let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
     table.style.gridTemplateColumns = gridConfig;
+
+    // Check for table overflow
+    checkTableOverflow();
   }
 
 
@@ -184,7 +214,7 @@
   // Listen for click events
   document.addEventListener('click', clickEventHandler, false);
 
-  // Listen for mousedown events
+  // Listen for mouse events
   document.addEventListener('mousedown', mousedownEventHandler, false);
   
 })();

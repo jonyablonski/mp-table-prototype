@@ -4,4 +4,5 @@
 
  .stage {
     margin: var(--grid-margin-block) var(--grid-margin-inline);
+    overflow: scroll;
   }

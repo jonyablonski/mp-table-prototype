@@ -3,6 +3,7 @@
  */
 
 .table {
+	position: relative;
   display: grid;
   grid-template-columns: minmax(max-content, 10vw) 1fr;
 }
@@ -84,3 +85,10 @@
 .table__col--segment:not(:first-child) .table__col-footer {
 	display: none;
 }
+
+
+/*
+ * States 
+ */
+
+.table.is-overflow {}
