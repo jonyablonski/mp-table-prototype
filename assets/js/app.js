@@ -17,7 +17,7 @@
    */
 
   let segmentDefault = 'minmax(max-content, 10vw)';
-  let metricDefault = '1fr';
+  let metricDefault = 'minmax(max-content, 1fr)';
   let target;
   let orgWidth;
   let orgMouseX;
@@ -99,7 +99,6 @@
     let width = parseInt(orgWidth + (e.pageX - orgMouseX), 10) + 'px';
     
     // Apply new width
-    // target.style.width = width;
     updateTableGrid(target, width);
     
     // Check for table overflow

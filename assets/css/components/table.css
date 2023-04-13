@@ -5,7 +5,7 @@
 .table {
 	position: relative;
   display: grid;
-  grid-template-columns: minmax(max-content, 10vw) 1fr;
+  grid-template-columns: minmax(max-content, 10vw) minmax(max-content, 1fr);
 }
 
 
@@ -91,7 +91,8 @@
  * States 
  */
 
-.table.is-overflow {}
+.table.is-overflow::after {
+}
 
 .table.is-resizing * {
 	user-select: none;
