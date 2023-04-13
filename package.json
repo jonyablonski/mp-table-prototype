@@ -1,5 +1,5 @@
 {
-  "name": "hugo-starter-project",
+  "name": "mp-table-prototype",
   "private": true,
   "scripts": {
     "prestart": "npm run build:icons",
