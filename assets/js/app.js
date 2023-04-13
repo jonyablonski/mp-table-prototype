@@ -16,19 +16,13 @@
    * Variables
    */
 
-  let segmentDefault = 'minmax(max-content, 10vw) ';
-  let metricDefault = '1fr ';
+  let segmentDefault = 'minmax(max-content, 10vw)';
+  let metricDefault = '1fr';
   let target;
   let orgWidth;
   let orgMouseX;
+  let gridMatrix = [segmentDefault, metricDefault];
 
-
-  /**
-   * States
-   */
-
-  let activeClass = 'is-active';
-  let inactiveClass = 'is-inactive';
 
 
   /**
@@ -85,13 +79,13 @@
     table.classList.add('is-resizing');
 
     // Resize column
-    document.addEventListener('mousemove', resizeCol, false);
+    document.addEventListener('mousemove', calcResize, false);
     
     // Resizing end
     document.addEventListener('mouseup', function() {
 
       // Remove event listener
-      document.removeEventListener('mousemove', resizeCol, false);
+      document.removeEventListener('mousemove', calcResize, false);
 
       // Update resizing state on table
       table.classList.remove('is-resizing');
@@ -99,21 +93,17 @@
   }
 
   // Resize Column
-  const resizeCol = (e) => {
+  const calcResize = (e) => {
     
     // Calculate new width
     let width = parseInt(orgWidth + (e.pageX - orgMouseX), 10) + 'px';
     
     // Apply new width
-    target.style.width = width;
+    // target.style.width = width;
+    updateTableGrid(target, width);
     
     // Check for table overflow
     checkTableOverflow();
-  }
-
-  // Check when table is overflowing container
-  const checkTableOverflow = () => {
-    table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
   }
 
   // Add new segment
@@ -130,8 +120,7 @@
     segments = document.querySelectorAll('[data-segment]');
 
     // Update table settings
-    let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
-    table.style.gridTemplateColumns = gridConfig;
+    updateTableGrid(newSegment, segmentDefault, 'add');
 
     // Check for table overflow
     checkTableOverflow();
@@ -153,8 +142,7 @@
     segments = document.querySelectorAll('[data-segment]');
 
     // Update table settings
-    let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
-    table.style.gridTemplateColumns = gridConfig;
+    updateTableGrid(lastSegment, null, 'remove');
 
     // Check for table overflow
     checkTableOverflow();
@@ -174,8 +162,7 @@
     metrics = document.querySelectorAll('[data-metric]');
 
     // Update table settings
-    let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
-    table.style.gridTemplateColumns = gridConfig;
+    updateTableGrid(newMetric, metricDefault, 'add');
 
     // Check for table overflow
     checkTableOverflow();
@@ -197,11 +184,35 @@
     metrics = document.querySelectorAll('[data-metric]');
 
     // Update table settings
-    let gridConfig = `${segmentDefault.repeat(segments.length)} ${metricDefault.repeat(metrics.length)}`;
-    table.style.gridTemplateColumns = gridConfig;
+    updateTableGrid(lastMetric, null, 'remove');
 
     // Check for table overflow
     checkTableOverflow();
+  }
+
+  // Update Table Grid
+  const updateTableGrid = (target, width, fn) => {
+  
+    // Get index of target elem
+    let index = [...table.children].indexOf(target);
+
+    // Update grid matrix array
+    if (fn === 'add') {
+      gridMatrix.splice(index - 1, 0, width);
+    } else if (fn === 'remove') {
+      gridMatrix.splice(index - 1, 1);
+    } else {
+      gridMatrix[index] = width;
+    }
+
+    // Apply new width to table element
+    table.style.gridTemplateColumns = gridMatrix.join(" ");
+
+  }
+
+  // Check when table is overflowing container
+  const checkTableOverflow = () => {
+    table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
   }
 
 
