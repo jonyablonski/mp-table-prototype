@@ -16,12 +16,12 @@
    * Variables
    */
 
-  let segmentDefault = 'minmax(max-content, 10vw)';
-  let metricDefault = 'minmax(max-content, 1fr)';
+  let segmentDefault = 'minmax(24ch, 10vw)';
+  let metricDefault = 'minmax(24ch, 1fr)';
   let target;
   let orgWidth;
   let orgMouseX;
-  let colMinWidth = '150';
+  let colMinWidth = '231';
   let gridMatrix = [segmentDefault, metricDefault];
 
 
