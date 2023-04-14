@@ -2,8 +2,18 @@
  * Block 
  */
 
- .stage {
+.stage {
   position: relative;
-    margin: var(--grid-margin-block) var(--grid-margin-inline);
-    overflow: scroll;
-  }
+  margin: var(--grid-margin-block) var(--grid-margin-inline);
+  overflow-x: scroll;
+  height: min-content;
+  background:
+    linear-gradient(to right, var(--base-background-color), var(--base-background-color), transparent calc(20px * 2)),
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,0.1), transparent),
+    linear-gradient(to left, var(--base-background-color), var(--base-background-color), transparent calc(20px * 2)),
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,0.1), transparent) 100%;
+  background-color: var(--base-background-color);
+  background-repeat: no-repeat;
+  background-attachment: local, scroll, local, scroll;
+  background-size: 100% 100%, 20px 100%, 100% 100%, 20px 100%;
+}

@@ -91,9 +91,6 @@
  * States 
  */
 
-.table.is-overflow::after {
-}
-
 .table.is-resizing * {
 	user-select: none;
 }
