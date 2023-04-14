@@ -21,6 +21,7 @@
   let target;
   let orgWidth;
   let orgMouseX;
+  let colMinWidth = '150';
   let gridMatrix = [segmentDefault, metricDefault];
 
 
@@ -102,10 +103,13 @@
   const calcResize = (e) => {
     
     // Calculate new width
-    let width = parseInt(orgWidth + (e.pageX - orgMouseX), 10) + 'px';
+    let width = parseInt(orgWidth + (e.pageX - orgMouseX), 10);
+
+    // Enforce minimum column width
+    if (width <= colMinWidth) return;
     
     // Apply new width
-    updateTableGrid(target, width);
+    updateTableGrid(target, width + 'px');
     
     // Check for table overflow
     checkTableOverflow();
