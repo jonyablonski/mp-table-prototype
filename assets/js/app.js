@@ -78,6 +78,9 @@
     // Update resizing state on table
     table.classList.add('is-resizing');
 
+    // Freeze columns to left of resize columns
+    freezeCols(target);
+
     // Resize column
     document.addEventListener('mousemove', calcResize, false);
     
@@ -86,6 +89,9 @@
 
       // Remove event listener
       document.removeEventListener('mousemove', calcResize, false);
+
+      // Unfreeze previous cols
+      unfreezeCols(target);
 
       // Update resizing state on table
       table.classList.remove('is-resizing');
@@ -103,6 +109,36 @@
     
     // Check for table overflow
     checkTableOverflow();
+  }
+
+  // Freeze columns on resize
+  const freezeCols = (e) => {
+    
+    // Get previous cols
+    let cols = getPreviousUntil(target, '[data-table]');
+
+    // Loop through previous cols
+    cols.forEach(col => {
+
+      // Apply fixed width to previous cols
+      updateTableGrid(col, col.offsetWidth + 'px');
+    });
+  }
+
+  // Unfreeze columns after resize
+  const unfreezeCols = (e) => {
+    
+    // Get previous cols
+    let cols = getPreviousUntil(target, '[data-table]');
+
+    // Get table width
+    let tableWidth = table.offsetWidth;
+
+    // Apply relative width to previous cols
+    cols.forEach(col => {
+      let relWidth = parseInt(col.offsetWidth, 10) / tableWidth * 100 + '%';
+      updateTableGrid(col, relWidth);
+    });
   }
 
   // Add new segment
