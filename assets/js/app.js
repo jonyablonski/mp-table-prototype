@@ -8,8 +8,8 @@
    */
 
   const table = document.querySelector('[data-table]');
-  let segments = document.querySelectorAll('[data-segment]');
-  let metrics = document.querySelectorAll('[data-metric]');
+  let segments = document.querySelectorAll('[data-col="segment"]');
+  let metrics = document.querySelectorAll('[data-col="metric"]');
 
 
   /**
@@ -56,6 +56,23 @@
     }
     
   }
+
+
+  // Handle doubleclick events globally
+  const dblclickEventHandler = (e) => {
+    
+    // Column drag handle
+    if (e.target.matches('[data-drag-handle]')) {
+
+      // Target column
+      let col = getClosest(e.target, '[data-col]');
+
+      // Reset width
+      resetColWidth(col)
+    }
+    
+  }
+
 
   // Handle mousedown events globally
   const mousedownEventHandler = (e) => {
@@ -156,7 +173,7 @@
     lastSegment.after(newSegment);
   
     // Update segment collection
-    segments = document.querySelectorAll('[data-segment]');
+    segments = document.querySelectorAll('[data-col="segment"]');
 
     // Update table settings
     updateTableGrid(newSegment, segmentDefault, 'add');
@@ -178,7 +195,7 @@
     lastSegment.remove();
   
     // Update segment collection
-    segments = document.querySelectorAll('[data-segment]');
+    segments = document.querySelectorAll('[data-col="segment"]');
 
     // Update table settings
     updateTableGrid(lastSegment, null, 'remove');
@@ -198,7 +215,7 @@
     lastMetric.after(newMetric);
   
     // Update metric collection
-    metrics = document.querySelectorAll('[data-metric]');
+    metrics = document.querySelectorAll('[data-col="metric"]');
 
     // Update table settings
     updateTableGrid(newMetric, metricDefault, 'add');
@@ -220,7 +237,7 @@
     lastMetric.remove();
   
     // Update segment collection
-    metrics = document.querySelectorAll('[data-metric]');
+    metrics = document.querySelectorAll('[data-col="metric"]');
 
     // Update table settings
     updateTableGrid(lastMetric, null, 'remove');
@@ -254,6 +271,19 @@
     table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
   }
 
+  const resetColWidth = (col) => {
+    
+    // Get column type
+    let colType = col.getAttribute('data-col');
+
+    // Apply default width
+    if (colType === 'segment') {
+      updateTableGrid(target,segmentDefault);
+    } else {
+      updateTableGrid(target,metricDefault);
+    }
+
+  }
 
 
   /**
@@ -266,6 +296,9 @@
 
   // Listen for click events
   document.addEventListener('click', clickEventHandler, false);
+
+  // Listen for double click events
+  document.addEventListener('dblclick', dblclickEventHandler, false);
 
   // Listen for mouse events
   document.addEventListener('mousedown', mousedownEventHandler, false);
