@@ -110,6 +110,8 @@
 
   /* Tables */
   --table-cell-height: 40px;
+  --table-col-min-width: 24ch;
+  --table-col-max-width: 10vw;
 
 
   /* Buttons */

@@ -52,11 +52,16 @@
         case action = 'remove-metric':
           removeMetric();
           break;
+        case action = 'new-session':
+          if (!e.target.disabled) {
+            e.target.setAttribute('disabled', true);
+            convertColsToRel();
+          }
+          break;
       }
     }
     
   }
-
 
   // Handle doubleclick events globally
   const dblclickEventHandler = (e) => {
@@ -73,7 +78,6 @@
     
   }
 
-
   // Handle mousedown events globally
   const mousedownEventHandler = (e) => {
 
@@ -85,6 +89,8 @@
 
   // Initize column resizing
   const initColResize = (e) => {
+
+    console.log(gridMatrix)
 
     // Store target
     target = getClosest(e.target, '[data-col]');
@@ -271,6 +277,7 @@
     table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
   }
 
+  // Reset column width to default
   const resetColWidth = (col) => {
     
     // Get column type
@@ -282,6 +289,27 @@
     } else {
       updateTableGrid(target,metricDefault);
     }
+
+  }
+
+  // Apply relative width to previous cols
+  const convertColsToRel = () => {
+    
+    // Get all columns
+    let cols = document.querySelectorAll('[data-col]');
+
+    // Get table width
+    let tableWidth = table.scrollWidth;
+
+    // Loop through cols and translate each to rel width
+    cols.forEach(col => {
+      let type = col.getAttribute('data-col');
+      let width = type === 'segment' ? `minmax(${colMinWidth}, ${col.offsetWidth}px)` : col.offsetWidth / (tableWidth / 100) + 'fr';
+      // let width = type === 'segment' ? `minmax(${colMinWidth}, ${col.offsetWidth}px)` :  metricDefault;
+      updateTableGrid(col, width);
+    });
+
+    console.log(gridMatrix)
 
   }
 

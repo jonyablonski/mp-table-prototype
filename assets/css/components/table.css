@@ -5,7 +5,7 @@
 .table {
 	position: relative;
   display: grid;
-  grid-template-columns: minmax(24ch, 10vw) minmax(24ch, 1fr);
+  grid-template-columns: minmax(var(--table-col-min-width), var(--table-col-max-width)) minmax(var(--table-col-min-width), 1fr);
 }
 
 

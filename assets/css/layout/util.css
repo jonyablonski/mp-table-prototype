@@ -4,6 +4,9 @@
 
 .util {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: var(--base-spacing);
   padding: var(--base-spacing);
   bottom: 0;

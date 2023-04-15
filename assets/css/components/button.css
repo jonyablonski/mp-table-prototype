@@ -82,3 +82,12 @@
 .button.is-active {
   color: var(--base-link-color);
 }
+
+.button[disabled],
+.button[disabled]:hover {
+  opacity: 0.5;
+  background: var(--secondary-background-color);
+  color: var(--base-font-color);
+  box-shadow: none;
+  cursor: not-allowed;
+}
