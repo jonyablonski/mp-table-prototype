@@ -90,8 +90,6 @@
   // Initize column resizing
   const initColResize = (e) => {
 
-    console.log(gridMatrix)
-
     // Store target
     target = getClosest(e.target, '[data-col]');
 
@@ -258,7 +256,7 @@
     // Get index of target elem
     let index = [...table.children].indexOf(target);
 
-    // Update grid matrix array
+    // Update grid matrix segments
     if (fn === 'add') {
       gridMatrix.splice(index - 1, 0, width);
     } else if (fn === 'remove') {
@@ -298,19 +296,31 @@
     // Get all columns
     let cols = document.querySelectorAll('[data-col]');
 
-    // Get table width
+    // Get table width including overflow
     let tableWidth = table.scrollWidth;
 
-    // Loop through cols and translate each to rel width
-    cols.forEach(col => {
-      let type = col.getAttribute('data-col');
-      let width = type === 'segment' ? `minmax(${colMinWidth}, ${col.offsetWidth}px)` : col.offsetWidth / (tableWidth / 100) + 'fr';
-      // let width = type === 'segment' ? `minmax(${colMinWidth}, ${col.offsetWidth}px)` :  metricDefault;
-      updateTableGrid(col, width);
+    // Set explicit width on table so col calc is accurate
+    table.style.width = tableWidth + 'px';
+
+    // Get segment widths
+    let segmentWidths = Array.from(segments).map(function (segment) {
+      return segment.offsetWidth;
     });
 
-    console.log(gridMatrix)
+    // Get sum of segment widths
+    let totalSegmentWidth = segmentWidths.reduce((accumulator, value) => {
+      return accumulator + value;
+    }, 0);
 
+    // Loop through cols and translate each to rel width
+    // Then update grid matrix
+    cols.forEach(col => {
+      let type = col.getAttribute('data-col');
+      let width = type === 'segment' 
+        ? `${parseInt(col.offsetWidth, 10)}px`
+        : `minmax(24ch, ${parseInt(col.offsetWidth, 10) / (tableWidth - totalSegmentWidth) * 100}fr)`;
+      updateTableGrid(col, width);
+    });
   }
 
 
