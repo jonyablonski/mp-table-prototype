@@ -46,7 +46,7 @@
  * States 
  */
 
-.header__nav-item a.active {
+.header__nav-item a.is-active {
   color: var(--tertiary-font-color);
   opacity: 1;
 }

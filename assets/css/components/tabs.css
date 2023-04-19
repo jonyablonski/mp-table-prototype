@@ -1,0 +1,7 @@
+.tab__pane {
+  display: none;
+}
+
+.tab__pane.is-active {
+  display: block;
+}

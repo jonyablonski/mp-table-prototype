@@ -8,6 +8,8 @@
    */
 
   const table = document.querySelector('[data-table]');
+  const tabs = document.querySelectorAll('[data-tab]');
+  const tabPanes = document.querySelectorAll('[data-tab-pane]');
   let segments = document.querySelectorAll('[data-col="segment"]');
   let metrics = document.querySelectorAll('[data-col="metric"]');
 
@@ -59,6 +61,22 @@
           }
           break;
       }
+    }
+
+    // Tabs Events
+    if (e.target.matches('[data-tab]')) {
+
+      // Get target pane
+      let target = e.target.hash;
+
+      // Update active state
+      tabs.forEach(tab => {
+        tab.classList.toggle('is-active', tab.hash === target);
+      });
+
+      // Switch visible tab pane
+      switchTab(target);
+    
     }
     
   }
@@ -322,6 +340,14 @@
       updateTableGrid(col, width);
     });
   }
+
+  // Switch active tab
+  const switchTab = (target) => {
+    tabPanes.forEach(pane => {
+      pane.classList.toggle('is-active', `#${pane.id}` === target);
+    });
+  }
+
 
 
   /**

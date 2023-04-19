@@ -2,72 +2,81 @@
   <aside class="sidebar"></aside>
   
   <div class="stage">
-    <div class="table" data-table>
 
-      <div class="table__col table__col--segment" data-col="segment">
-        <div class="table__col-header">
-          <h3 class="table__title">Segment</h3>
-          <p class="table__meta">
-            <a href="">Showing all</a>
-          </p>
+    <!-- Report View -->
+    <div id="report" data-tab-pane class="tab__pane is-active">
+      <div class="table" data-table>
+
+        <div class="table__col table__col--segment" data-col="segment">
+          <div class="table__col-header">
+            <h3 class="table__title">Segment</h3>
+            <p class="table__meta">
+              <a href="">Showing all</a>
+            </p>
+          </div>
+          <div class="table__col-body">
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+            <div class="table__cell">Segment Name</div>
+          </div>
+          <div class="table__col-footer">
+            <div class="table__cell">Overall</div>
+          </div>
+          <div class="table__col-drag" data-drag-handle></div>
         </div>
-        <div class="table__col-body">
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
-          <div class="table__cell">Segment Name</div>
+
+        <div class="table__col table__col--metric" data-col="metric">
+          <div class="table__col-header">
+            <h3 class="table__title">Metric</h3>
+            <p class="table__meta">Count Total</p>
+          </div>
+          <div class="table__col-body">
+            <div class="table__cell">8,906</div>
+            <div class="table__cell">16,755</div>
+            <div class="table__cell">9,148</div>
+            <div class="table__cell">11,379</div>
+            <div class="table__cell">13,006</div>
+            <div class="table__cell">12,096</div>
+            <div class="table__cell">153,339</div>
+            <div class="table__cell">184,492</div>
+            <div class="table__cell">193,323</div>
+            <div class="table__cell">203,393</div>
+            <div class="table__cell">212,992</div>
+            <div class="table__cell">244,282</div>
+          </div>
+          <div class="table__col-footer">
+            <div class="table__cell">847,292</div>
+          </div>
+          <div class="table__col-drag" data-drag-handle></div>
         </div>
-        <div class="table__col-footer">
-          <div class="table__cell">Overall</div>
-        </div>
-        <div class="table__col-drag" data-drag-handle></div>
+
       </div>
-
-      <div class="table__col table__col--metric" data-col="metric">
-        <div class="table__col-header">
-          <h3 class="table__title">Metric</h3>
-          <p class="table__meta">Count Total</p>
+      <div class="util">
+        <div>
+          <button class="button" data-table="add-segment">Add Segment</button>
+          <button class="button" data-table="remove-segment">Remove Segment</button>
+          <button class="button" data-table="add-metric">Add Metric</button>
+          <button class="button" data-table="remove-metric">Remove Metric</button>
         </div>
-        <div class="table__col-body">
-          <div class="table__cell">8,906</div>
-          <div class="table__cell">16,755</div>
-          <div class="table__cell">9,148</div>
-          <div class="table__cell">11,379</div>
-          <div class="table__cell">13,006</div>
-          <div class="table__cell">12,096</div>
-          <div class="table__cell">153,339</div>
-          <div class="table__cell">184,492</div>
-          <div class="table__cell">193,323</div>
-          <div class="table__cell">203,393</div>
-          <div class="table__cell">212,992</div>
-          <div class="table__cell">244,282</div>
+        <div>
+          <button class="button" data-table="new-session">New Session</button>
         </div>
-        <div class="table__col-footer">
-          <div class="table__cell">847,292</div>
-        </div>
-        <div class="table__col-drag" data-drag-handle></div>
       </div>
+    </div>
 
+    <!-- Dashboard View -->
+    <div id="dashboard" data-tab-pane class="tab__pane">
+      {{ partial "components/card" . }}
     </div>
-  </div>
 
-  <div class="util">
-    <div>
-      <button class="button" data-table="add-segment">Add Segment</button>
-      <button class="button" data-table="remove-segment">Remove Segment</button>
-      <button class="button" data-table="add-metric">Add Metric</button>
-      <button class="button" data-table="remove-metric">Remove Metric</button>
-    </div>
-    <div>
-      <button class="button" data-table="new-session">New Session</button>
-    </div>
   </div>
 {{ end }}
