@@ -10,7 +10,6 @@
   const tables = document.querySelectorAll('[data-table]');
   const tabs = document.querySelectorAll('[data-tab]');
   const tabPanes = document.querySelectorAll('[data-tab-pane]');
-  const cards = document.querySelectorAll('[data-card]');
   let segments = tables[0].querySelectorAll('[data-col="segment"]');
   let metrics = tables[0].querySelectorAll('[data-col="metric"]');
   
@@ -19,9 +18,10 @@
    * Variables
    */
 
-  let segmentDefault = 'minmax(24ch, 10vw)';
+  let segmentDefault = 'minmax(24ch, max-content)';
   let metricDefault = 'minmax(24ch, 1fr)';
   let target;
+  let targetTable;
   let orgWidth;
   let orgMouseX;
   let colMinWidth = '231';
@@ -109,15 +109,16 @@
   // Initize column resizing
   const initColResize = (e) => {
 
-    // Store target
+    // Store target and parent table
     target = getClosest(e.target, '[data-col]');
+    targetTable = getClosest(target, '[data-table]')
 
     // Get target values
     orgWidth = target.offsetWidth;
     orgMouseX = e.pageX;
 
     // Update resizing state on table
-    tables[0].classList.add('is-resizing');
+    targetTable.classList.add('is-resizing');
 
     // Freeze columns to left of resize columns
     freezeCols(target);
@@ -135,8 +136,10 @@
       unfreezeCols(target);
 
       // Update resizing state on table
-      tables[0].classList.remove('is-resizing');
+      targetTable.classList.remove('is-resizing');
+
     }, false);
+  
   }
 
   // Resize Column
@@ -283,9 +286,12 @@
 
   // Update Table Grid
   const updateTableGrid = (target, width, fn) => {
-  
+
+    // Set targetTable to table report table if table function isn’t set
+    if (fn) targetTable = tables[0];
+
     // Get index of target elem
-    let index = [...tables[0].children].indexOf(target);
+    let index = [...targetTable.children].indexOf(target);
 
     // Update grid matrix segments
     if (fn === 'add') {
@@ -296,8 +302,16 @@
       gridMatrix[index] = width;
     }
 
-    // Apply new width to table element
-    tables[0].style.gridTemplateColumns = gridMatrix.join(" ");
+    // If targetTable is report table
+    // Apply new grid settings to all tables
+    // Otherwise only apply settings to that specific table
+    if (targetTable === tables[0]) {
+      tables.forEach(table => {
+        table.style.gridTemplateColumns = gridMatrix.join(" ");
+      });
+    } else {
+      targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
+    }
 
   }
 
