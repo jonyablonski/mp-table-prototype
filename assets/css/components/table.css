@@ -22,12 +22,8 @@
 	border-bottom: var(--base-border);
 }
 
-.table__col-header,
-.table__cell {
-	padding: 0 calc(var(--base-spacing) / 2);
-}
-
 .table__col-header {
+	padding: var(--base-spacing);
 	border-bottom: var(--base-border);
 }
 
@@ -54,6 +50,7 @@
 
 .table__cell {
 	height: var(--table-cell-height);
+	padding: 0 var(--base-spacing);
 	line-height: var(--table-cell-height);
 }
 
