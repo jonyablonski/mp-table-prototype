@@ -6,6 +6,7 @@
 	position: relative;
   display: grid;
   grid-template-columns: minmax(var(--table-col-min-width), var(--table-col-max-width)) minmax(var(--table-col-min-width), 1fr);
+	counter-reset: segment metric;
 }
 
 
@@ -78,12 +79,26 @@
  * Modifiers 
  */
 
+.table__col--segment {
+	counter-increment: segment;
+}
+
 .table__col--metric {
 	text-align: right;
+	counter-increment: metric;
 }
 
 .table__col--segment:not(:first-child) .table__col-footer {
 	display: none;
+}
+
+.table__col--segment .table__title::after {
+	content: " " counter(segment);
+}
+
+.table__col--metric .table__title::before {
+	content: counter(metric, upper-alpha) " ";
+	color: var(--secondary-font-color);
 }
 
 
