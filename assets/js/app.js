@@ -381,11 +381,10 @@
     // Clone report table content
     let reportTable = tables[0].cloneNode(true).innerHTML;
 
-    // Replace table content
     tables.forEach((table, index) => {
       if (index !== 0) {
         table.innerHTML = reportTable;
-        table.style.gridTemplateColumns = gridMatrix.join(" ");
+        table.style.gridTemplateColumns = tables[0].style.gridTemplateColumns;
       }
     });
 
