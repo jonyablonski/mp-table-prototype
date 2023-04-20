@@ -162,14 +162,16 @@
   const freezeCols = (e) => {
     
     // Get previous cols
-    let cols = getPreviousUntil(target, '[data-table]');
+    let prevCols = getPreviousUntil(target, '[data-table]');
 
     // Loop through previous cols
-    cols.forEach(col => {
+    prevCols.forEach(col => {
 
       // Apply fixed width to previous cols
       updateTableGrid(col, col.offsetWidth + 'px');
+
     });
+
   }
 
   // Unfreeze columns after resize
@@ -179,13 +181,49 @@
     let cols = getPreviousUntil(target, '[data-table]');
 
     // Get table width
-    let tableWidth = tables[0].offsetWidth;
+    let tableWidth = targetTable.offsetWidth;
 
     // Apply relative width to previous cols
     cols.forEach(col => {
       let relWidth = parseInt(col.offsetWidth, 10) / tableWidth * 100 + '%';
       updateTableGrid(col, relWidth);
     });
+  }
+
+  // Update Table Grid
+  const updateTableGrid = (target, width, fn) => {
+
+    // Set targetTable to table report table if table function isn’t set
+    if (fn) targetTable = tables[0];
+
+    console.log(target)
+
+    // Get index of target elem
+    let index = [...targetTable.children].indexOf(target);
+
+    // Update grid matrix segments
+    if (fn === 'add') {
+      gridMatrix.splice(index - 1, 0, width);
+    } else if (fn === 'remove') {
+      gridMatrix.splice(index - 1, 1);
+    } else {
+      gridMatrix[index] = width;
+    }
+
+    // If targetTable is report table
+    // Apply new grid settings to all tables
+    // Otherwise only apply settings to that specific table
+    // if (targetTable !== tables[0]) {
+    //   tables.forEach(table => {
+    //     table.style.gridTemplateColumns = gridMatrix.join(" ");
+    //   })
+    // } else {
+    //   targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
+    // }
+    tables.forEach(table => {
+      table.style.gridTemplateColumns = gridMatrix.join(" ");
+    })
+
   }
 
   // Add new segment
@@ -282,37 +320,6 @@
 
     // Sync all table content with report table
     syncTables();
-  }
-
-  // Update Table Grid
-  const updateTableGrid = (target, width, fn) => {
-
-    // Set targetTable to table report table if table function isn’t set
-    if (fn) targetTable = tables[0];
-
-    // Get index of target elem
-    let index = [...targetTable.children].indexOf(target);
-
-    // Update grid matrix segments
-    if (fn === 'add') {
-      gridMatrix.splice(index - 1, 0, width);
-    } else if (fn === 'remove') {
-      gridMatrix.splice(index - 1, 1);
-    } else {
-      gridMatrix[index] = width;
-    }
-
-    // If targetTable is report table
-    // Apply new grid settings to all tables
-    // Otherwise only apply settings to that specific table
-    if (targetTable === tables[0]) {
-      tables.forEach(table => {
-        table.style.gridTemplateColumns = gridMatrix.join(" ");
-      });
-    } else {
-      targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
-    }
-
   }
 
   // Check when table is overflowing container
