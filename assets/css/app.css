@@ -20,7 +20,7 @@
 
 /* Components */
 @import "components/button";
-@import "components/card/card";
+@import "components/card";
 @import "components/container";
 @import "components/icon";
 @import "components/list";

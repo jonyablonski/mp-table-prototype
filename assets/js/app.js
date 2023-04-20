@@ -7,12 +7,13 @@
    * Selectors
    */
 
-  const table = document.querySelector('[data-table]');
+  const tables = document.querySelectorAll('[data-table]');
   const tabs = document.querySelectorAll('[data-tab]');
   const tabPanes = document.querySelectorAll('[data-tab-pane]');
-  let segments = document.querySelectorAll('[data-col="segment"]');
-  let metrics = document.querySelectorAll('[data-col="metric"]');
-
+  const cards = document.querySelectorAll('[data-card]');
+  let segments = tables[0].querySelectorAll('[data-col="segment"]');
+  let metrics = tables[0].querySelectorAll('[data-col="metric"]');
+  
 
   /**
    * Variables
@@ -37,8 +38,8 @@
   const clickEventHandler = (e) => {
     
     // Table Utility Events
-    if (e.target.matches('[data-table]')) {
-      let action = e.target.getAttribute('data-table');
+    if (e.target.matches('[data-table-util]')) {
+      let action = e.target.getAttribute('data-table-util');
 
       // Respond to card actions
       switch (action) {
@@ -116,7 +117,7 @@
     orgMouseX = e.pageX;
 
     // Update resizing state on table
-    table.classList.add('is-resizing');
+    tables[0].classList.add('is-resizing');
 
     // Freeze columns to left of resize columns
     freezeCols(target);
@@ -134,7 +135,7 @@
       unfreezeCols(target);
 
       // Update resizing state on table
-      table.classList.remove('is-resizing');
+      tables[0].classList.remove('is-resizing');
     }, false);
   }
 
@@ -175,7 +176,7 @@
     let cols = getPreviousUntil(target, '[data-table]');
 
     // Get table width
-    let tableWidth = table.offsetWidth;
+    let tableWidth = tables[0].offsetWidth;
 
     // Apply relative width to previous cols
     cols.forEach(col => {
@@ -195,13 +196,16 @@
     lastSegment.after(newSegment);
   
     // Update segment collection
-    segments = document.querySelectorAll('[data-col="segment"]');
+    segments = tables[0].querySelectorAll('[data-col="segment"]');
 
     // Update table settings
     updateTableGrid(newSegment, segmentDefault, 'add');
 
     // Check for table overflow
     checkTableOverflow();
+
+    // Sync all table content with report table
+    syncTables();
   }
 
   // Remove last segment
@@ -217,13 +221,16 @@
     lastSegment.remove();
   
     // Update segment collection
-    segments = document.querySelectorAll('[data-col="segment"]');
+    segments = tables[0].querySelectorAll('[data-col="segment"]');
 
     // Update table settings
     updateTableGrid(lastSegment, null, 'remove');
 
     // Check for table overflow
     checkTableOverflow();
+
+    // Sync all table content with report table
+    syncTables();
   }
 
   // Add new metric
@@ -237,13 +244,16 @@
     lastMetric.after(newMetric);
   
     // Update metric collection
-    metrics = document.querySelectorAll('[data-col="metric"]');
+    metrics = tables[0].querySelectorAll('[data-col="metric"]');
 
     // Update table settings
     updateTableGrid(newMetric, metricDefault, 'add');
 
     // Check for table overflow
     checkTableOverflow();
+
+    // Sync all table content with report table
+    syncTables();
   }
 
   // Remove last metric
@@ -259,20 +269,23 @@
     lastMetric.remove();
   
     // Update segment collection
-    metrics = document.querySelectorAll('[data-col="metric"]');
+    metrics = tables[0].querySelectorAll('[data-col="metric"]');
 
     // Update table settings
     updateTableGrid(lastMetric, null, 'remove');
 
     // Check for table overflow
     checkTableOverflow();
+
+    // Sync all table content with report table
+    syncTables();
   }
 
   // Update Table Grid
   const updateTableGrid = (target, width, fn) => {
   
     // Get index of target elem
-    let index = [...table.children].indexOf(target);
+    let index = [...tables[0].children].indexOf(target);
 
     // Update grid matrix segments
     if (fn === 'add') {
@@ -284,13 +297,13 @@
     }
 
     // Apply new width to table element
-    table.style.gridTemplateColumns = gridMatrix.join(" ");
+    tables[0].style.gridTemplateColumns = gridMatrix.join(" ");
 
   }
 
   // Check when table is overflowing container
   const checkTableOverflow = () => {
-    table.classList.toggle('is-overflow', table.scrollWidth > table.parentNode.offsetWidth);
+    tables[0].classList.toggle('is-overflow', tables[0].scrollWidth > tables[0].parentNode.offsetWidth);
   }
 
   // Reset column width to default
@@ -315,10 +328,10 @@
     let cols = document.querySelectorAll('[data-col]');
 
     // Get table width including overflow
-    let tableWidth = table.scrollWidth;
+    let tableWidth = tables[0].scrollWidth;
 
     // Set explicit width on table so col calc is accurate
-    table.style.width = tableWidth + 'px';
+    tables[0].style.width = tableWidth + 'px';
 
     // Get segment widths
     let segmentWidths = Array.from(segments).map(function (segment) {
@@ -346,6 +359,22 @@
     tabPanes.forEach(pane => {
       pane.classList.toggle('is-active', `#${pane.id}` === target);
     });
+  }
+
+  // Synchronize all tables to report table
+  const syncTables = () => {
+
+    // Clone report table content
+    let reportTable = tables[0].cloneNode(true).innerHTML;
+
+    // Replace table content
+    tables.forEach((table, index) => {
+      if (index !== 0) {
+        table.innerHTML = reportTable;
+        table.style.gridTemplateColumns = gridMatrix.join(" ");
+      }
+    });
+
   }
 
 

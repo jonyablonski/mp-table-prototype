@@ -1,238 +1,65 @@
-<article class="card" data-card="default" data-card-size="12" draggable="false">
+<article class="card" data-card data-card-size="{{ .size }}">
 
-  <!-- Utility -->
-  <div class="card__utility">
-    <button class="button button--icon button--circle" data-toggle="utility">
-      {{ partial "components/icon" (dict "name" "add" "size" "32") }}
-    </button>
-
-    <div class="card__utility-menu" data-toggle-content="utility">
-      <h3 class="card__utility-header">Content</h3>
-      <ul class="card__utility-section list">
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addText">
-            {{ partial "components/icon" (dict "name" "edit" "size" "18" "align" "left") }}
-            Text
-          </button>
-        </li>
-      </ul>
-
-      <h3 class="card__utility-header">Reports</h3>
-      <ul class="card__utility-section list">
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addData" data-type="insight">
-            {{ partial "components/icon" (dict "name" "folder" "size" "18" "align" "left") }}
-            Add Existing
-          </button>
-        </li>
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addData" data-type="insight">
-            {{ partial "components/icon" (dict "name" "insights" "size" "18" "align" "left") }}
-            Insights
-          </button>
-        </li>
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addData" data-type="funnel">
-            {{ partial "components/icon" (dict "name" "funnels" "size" "18" "align" "left") }}
-            Funnel
-          </button>
-        </li>
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addData" data-type="retention">
-            {{ partial "components/icon" (dict "name" "retention" "size" "18" "align" "left") }}
-            Retention
-          </button>
-        </li>
-        <li class="list__item">
-          <button class="button button--text" data-card-action="addData" data-type="flow">
-            {{ partial "components/icon" (dict "name" "flows" "size" "18" "align" "left") }}
-            Flows
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Card drag indicator -->
-  <div class="card__drag">
-    <button class="button button--icon button--drag" data-card-action="drag" data-toggle="menu">
-      {{ partial "components/icon" (dict "name" "drag" "size" "16") }}
-    </button>
-
-    <div class="card__drag-menu list" data-toggle-content="menu">
-      <li class="list__item">
-        <button class="button button--text" data-card-action="delete">
-          {{ partial "components/icon" (dict "name" "delete" "size" "18" "align" "left") }}
-          Delete block
-        </button>
-      </li>
-      <li class="list__item">
-        <button class="button button--text" data-card-action="duplicate">
-          {{ partial "components/icon" (dict "name" "duplicate" "size" "18" "align" "left") }}
-          Duplicate block
-        </button>
-      </li>
-      <li class="list__item">
-        <button class="button button--text" data-card-action="">
-          {{ partial "components/icon" (dict "name" "link" "size" "18" "align" "left") }}
-          Copy link to block
-        </button>
-      </li>
-      <li class="list__item list__item--text-align">
-        <button class="button button--text button--toggle" data-toggle="drag-text-align" data-toggle-hover="drag-text-align">
-          {{ partial "components/icon" (dict "name" "align_left" "size" "18" "align" "left") }}
-          Align block
-          {{ partial "components/icon" (dict "name" "caret" "size" "12") }}
-        </button>
-
-        <!-- Text align menu -->
-        <ul class="card__editor-alignment list" data-toggle-content="drag-text-align" data-editor-toggles>
-          <li class="list__item is-active">
-            <button class="button button--text" data-card-action="align-left">
-              {{ partial "components/icon" (dict "name" "align_left" "size" "18" "align" "left") }}
-              Align left
-            </button>
-          </li>
-          <li class="list__item is-inactive">
-            <button class="button button--text" data-card-action="align-center">
-              {{ partial "components/icon" (dict "name" "align_center" "size" "18" "align" "left") }}
-              Align center
-            </button>
-          </li>
-          <li class="list__item is-inactive">
-            <button class="button button--text" data-card-action="align-right">
-              {{ partial "components/icon" (dict "name" "align_right" "size" "18" "align" "left") }}
-              Align right
-            </button>
-          </li>
-        </ul>
-      </li>
-    </div>
-  </div>
+  <!-- Header -->
+  <header class="card__header">
+    <h3 class="card__header-title" data-card-header>Line Graph</h3>
+    <p class="card__header-subtitle">Total, last 2 days</p>
+  </header>
   
-  <!-- Text editor -->
-  <div class="card__editor" data-text-editor>
-    <div class="card__editor-section">
-      <button class="button button--icon" data-card-action="h1">
-        {{ partial "components/icon" (dict "name" "h1" "size" "18") }}
-      </button>
-      <button class="button button--icon" data-card-action="h2">
-        {{ partial "components/icon" (dict "name" "h2" "size" "18") }}
-      </button>
-      <button class="button button--icon" data-card-action="h3">
-        {{ partial "components/icon" (dict "name" "h3" "size" "18") }}
-      </button>
-    </div>
-
-    <div class="card__editor-section">
-      <button class="button button--icon" data-card-action="bold">
-        {{ partial "components/icon" (dict "name" "bold" "size" "18") }}
-      </button>
-      <button class="button button--icon" data-card-action="italic">
-        {{ partial "components/icon" (dict "name" "italic" "size" "18") }}
-      </button>
-    </div>
-
-    <!-- Overview Toggle -->
-    <button class="button button--icon" data-toggle="text-menu">
-      {{ partial "components/icon" (dict "name" "more" "size" "16") }}
-    </button>
-    
-    <!-- Overflow menu -->
-    <ul class="card__editor-menu list" data-toggle-content="text-menu">
-      <li class="list__item">
-        <button class="button button--text" data-card-action="delete">
-          {{ partial "components/icon" (dict "name" "delete" "size" "18" "align" "left") }}
-          Delete block
-        </button>
-      </li>
-      <li class="list__item">
-        <button class="button button--text" data-card-action="duplicate">
-          {{ partial "components/icon" (dict "name" "duplicate" "size" "18" "align" "left") }}
-          Duplicate block
-        </button>
-      </li>
-      <li class="list__item">
-        <button class="button button--text" data-card-action="">
-          {{ partial "components/icon" (dict "name" "link" "size" "18" "align" "left") }}
-          Copy link to block
-        </button>
-      </li>
-      <li class="list__item">
-        <button class="button button--text button--toggle" data-toggle="text-align" data-toggle-hover="text-align">
-          {{ partial "components/icon" (dict "name" "align_left" "size" "18" "align" "left") }}
-          Align block
-          {{ partial "components/icon" (dict "name" "caret" "size" "12") }}
-        </button>
-
-        <!-- Text align menu -->
-        <ul class="card__editor-alignment list" data-toggle-content="text-align" data-editor-toggles>
-          <li class="list__item is-active">
-            <button class="button button--text" data-card-action="align-left">
-              {{ partial "components/icon" (dict "name" "align_left" "size" "18" "align" "left") }}
-              Align left
-            </button>
-          </li>
-          <li class="list__item is-inactive">
-            <button class="button button--text" data-card-action="align-center">
-              {{ partial "components/icon" (dict "name" "align_center" "size" "18" "align" "left") }}
-              Align center
-            </button>
-          </li>
-          <li class="list__item is-inactive">
-            <button class="button button--text" data-card-action="align-right">
-              {{ partial "components/icon" (dict "name" "align_right" "size" "18" "align" "left") }}
-              Align right
-            </button>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Text -->
-  <div contenteditable="true" class="card__text" data-card-action="text" data-editable data-placeholder="Write about your data..." data-text-align="left" data-vert-align="top">
-  </div>
-
-  <!-- Controls -->
-  <div class="card__controls" data-card-controls>
-    <div class="card__controls-section">
-      <button class="card__controls-item button button--icon" data-card-action="text">
-        {{ partial "components/icon" (dict "name" "edit" "size" "18") }}
-      </button>
-    </div>
-    <div class="card__controls-section">
-      <button class="card__controls-item button button--icon" data-card-action="data" data-type="insight">
-        {{ partial "components/icon" (dict "name" "folder" "size" "18") }}
-      </button>
-      <button class="card__controls-item button button--icon" data-card-action="data" data-type="insight">
-        {{ partial "components/icon" (dict "name" "insights" "size" "18") }}
-      </button>
-      <button class="card__controls-item button button--icon" data-card-action="data" data-type="funnel">
-        {{ partial "components/icon" (dict "name" "funnels" "size" "18") }}
-      </button>
-      <button class="card__controls-item button button--icon" data-card-action="data" data-type="flow">
-        {{ partial "components/icon" (dict "name" "flows" "size" "18") }}
-      </button>
-      <button class="card__controls-item button button--icon" data-card-action="data" data-type="retention">
-        {{ partial "components/icon" (dict "name" "retention" "size" "18") }}
-      </button>
-    </div>
-  </div>
-
   <!-- Content -->
   <div class="card__content" data-card-content>
-    <header class="card__content-header">
-      <h3 class="card__content-header-title" data-card-header>Line Graph</h3>
-      <p class="card__content-header-subtitle">Total, last 2 days</p>
-    </header>
-  </div>
-
-  <!-- Resize controls -->
-  <div class="card__resize card__resize--bottom" data-resize="bottom">
-  </div>
-
-  <div class="card__resize card__resize--right" data-resize="right">
+    <div class="table" data-table>
+      <div class="table__col table__col--segment" data-col="segment">
+        <div class="table__col-header">
+          <h3 class="table__title">Segment</h3>
+          <p class="table__meta">
+            <a href="">Showing all</a>
+          </p>
+        </div>
+        <div class="table__col-body">
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+          <div class="table__cell">Segment Name</div>
+        </div>
+        <div class="table__col-footer">
+          <div class="table__cell">Overall</div>
+        </div>
+        <div class="table__col-drag" data-drag-handle></div>
+      </div>
+      <div class="table__col table__col--metric" data-col="metric">
+        <div class="table__col-header">
+          <h3 class="table__title">Metric</h3>
+          <p class="table__meta">Count Total</p>
+        </div>
+        <div class="table__col-body">
+          <div class="table__cell">8,906</div>
+          <div class="table__cell">16,755</div>
+          <div class="table__cell">9,148</div>
+          <div class="table__cell">11,379</div>
+          <div class="table__cell">13,006</div>
+          <div class="table__cell">12,096</div>
+          <div class="table__cell">153,339</div>
+          <div class="table__cell">184,492</div>
+          <div class="table__cell">193,323</div>
+          <div class="table__cell">203,393</div>
+          <div class="table__cell">212,992</div>
+          <div class="table__cell">244,282</div>
+        </div>
+        <div class="table__col-footer">
+          <div class="table__cell">847,292</div>
+        </div>
+        <div class="table__col-drag" data-drag-handle></div>
+      </div>
+    </div>
   </div>
 
 </article>

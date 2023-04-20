@@ -1,0 +1,67 @@
+/* 
+ * Block 
+ */
+
+.card {
+  position: relative;
+  height: 448px;
+  overflow: hidden;
+  background-color: var(--base-background-color);
+  border-radius: var(--base-border-radius);
+  border: var(--base-border);
+}
+
+
+/* 
+ * Elements
+ */
+
+.card__content {
+  height: 100%;
+  overflow-x: scroll;
+}
+
+.card__header {
+  padding: var(--base-spacing);
+  border-bottom: var(--base-border);
+  background-color: var(--base-background-color);
+  border-radius: var(--base-border-radius) var(--base-border-radius) 0 0;
+  user-select: none;
+}
+
+.card__header-title {
+  margin: 0 0 calc(var(--base-spacing) / 4);
+  text-transform: capitalize;
+}
+
+.card__header-subtitle {
+  margin: 0;
+  color: var(--secondary-font-color);
+}
+
+
+/* 
+ * Modifiers 
+ */
+
+/* Card sizing */
+[data-card-size="12"] {
+  width: 100%;
+}
+
+[data-card-size="6"] {
+  width: 50%;
+}
+
+[data-card-size="4"] {
+  width: 33.3333%
+}
+
+[data-card-size="3"] {
+  width: 25%;
+}
+
+
+/* 
+ * States 
+ */

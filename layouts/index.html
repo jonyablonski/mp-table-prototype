@@ -5,6 +5,7 @@
 
     <!-- Report View -->
     <div id="report" data-tab-pane class="tab__pane is-active">
+      <h1>Report View</h1>
       <div class="table" data-table>
 
         <div class="table__col table__col--segment" data-col="segment">
@@ -62,20 +63,39 @@
       </div>
       <div class="util">
         <div>
-          <button class="button" data-table="add-segment">Add Segment</button>
-          <button class="button" data-table="remove-segment">Remove Segment</button>
-          <button class="button" data-table="add-metric">Add Metric</button>
-          <button class="button" data-table="remove-metric">Remove Metric</button>
+          <button class="button" data-table-util="add-segment">Add Segment</button>
+          <button class="button" data-table-util="remove-segment">Remove Segment</button>
+          <button class="button" data-table-util="add-metric">Add Metric</button>
+          <button class="button" data-table-util="remove-metric">Remove Metric</button>
         </div>
         <div>
-          <button class="button" data-table="new-session">New Session</button>
+          <button class="button" data-table-util="new-session">New Session</button>
         </div>
       </div>
     </div>
 
     <!-- Dashboard View -->
     <div id="dashboard" data-tab-pane class="tab__pane">
-      {{ partial "components/card" . }}
+      <h1>Dashboard View</h1>
+      <section>
+        <h2>Full Card</h2>
+        {{ partial "components/card" (dict "context" . "size" 12) }}
+      </section>
+
+      <section>
+        <h2>Half Card</h2>
+        {{ partial "components/card" (dict "context" . "size" 6) }}
+      </section>
+
+      <section>
+        <h2>1/3 Card</h2>
+        {{ partial "components/card" (dict "context" . "size" 4) }}
+      </section>
+
+      <section>
+        <h2>1/4 Card</h2>
+        {{ partial "components/card" (dict "context" . "size" 3) }}
+      </section>
     </div>
 
   </div>
