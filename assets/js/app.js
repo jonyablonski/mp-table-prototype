@@ -1,4 +1,4 @@
-(function() {
+// (function() {
 
   'use strict';
 
@@ -111,7 +111,11 @@
 
     // Store target and parent table
     target = getClosest(e.target, '[data-col]');
-    targetTable = getClosest(target, '[data-table]')
+    targetTable = getClosest(target, '[data-table]');
+    
+    // Update gridMatrix based on target table
+    let targetTableStyle = getComputedStyle(targetTable);
+    gridMatrix = targetTableStyle.gridTemplateColumns.split(' ');
 
     // Get target values
     orgWidth = target.offsetWidth;
@@ -176,7 +180,8 @@
 
   // Unfreeze columns after resize
   const unfreezeCols = (e) => {
-    
+  
+
     // Get previous cols
     let cols = getPreviousUntil(target, '[data-table]');
 
@@ -196,8 +201,6 @@
     // Set targetTable to table report table if table function isn’t set
     if (fn) targetTable = tables[0];
 
-    console.log(target)
-
     // Get index of target elem
     let index = [...targetTable.children].indexOf(target);
 
@@ -213,16 +216,13 @@
     // If targetTable is report table
     // Apply new grid settings to all tables
     // Otherwise only apply settings to that specific table
-    // if (targetTable !== tables[0]) {
-    //   tables.forEach(table => {
-    //     table.style.gridTemplateColumns = gridMatrix.join(" ");
-    //   })
-    // } else {
-    //   targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
-    // }
-    tables.forEach(table => {
-      table.style.gridTemplateColumns = gridMatrix.join(" ");
-    })
+    if (targetTable === tables[0]) {
+      tables.forEach(table => {
+        table.style.gridTemplateColumns = gridMatrix.join(" ");
+      })
+    } else {
+      targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
+    }
 
   }
 
@@ -416,4 +416,4 @@
   // Listen for mouse events
   document.addEventListener('mousedown', mousedownEventHandler, false);
   
-})();
+// })();
