@@ -18,8 +18,8 @@
    * Variables
    */
 
-  let segmentDefault = `minmax(24ch, max-content)`;
-  let metricDefault = `minmax(24ch, 1fr)`;
+  let segmentDefault = `minmax(var(--table-col-min-width), var(--table-col-max-width))`;
+  let metricDefault = `minmax(var(--table-col-min-width), 1fr)`;
   let target;
   let targetTable;
   let orgWidth;

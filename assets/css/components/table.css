@@ -6,7 +6,6 @@
 	position: relative;
 	counter-reset: segment metric;
   display: grid;
-  /* grid-template-columns: minmax(var(--table-col-min-width), var(--table-col-max-width)) minmax(var(--table-col-min-width), 1fr); */
 }
 
 
