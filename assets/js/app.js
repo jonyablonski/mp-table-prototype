@@ -18,8 +18,8 @@
    * Variables
    */
 
-  let segmentDefault = 'minmax(24ch, max-content)';
-  let metricDefault = 'minmax(24ch, 1fr)';
+  let segmentDefault = `minmax(24ch, max-content)`;
+  let metricDefault = `minmax(24ch, 1fr)`;
   let target;
   let targetTable;
   let orgWidth;
@@ -114,8 +114,9 @@
     targetTable = getClosest(target, '[data-table]');
     
     // Update gridMatrix based on target table
-    let targetTableStyle = getComputedStyle(targetTable);
-    gridMatrix = targetTableStyle.gridTemplateColumns.split(' ');
+    // Split column data string at each space not preceded by comma
+    let targetTableGrid = targetTable.style.gridTemplateColumns;
+    gridMatrix = targetTableGrid.split(/(?<!,)\s/g);
 
     // Get target values
     orgWidth = target.offsetWidth;
@@ -218,10 +219,10 @@
     // Otherwise only apply settings to that specific table
     if (targetTable === tables[0]) {
       tables.forEach(table => {
-        table.style.gridTemplateColumns = gridMatrix.join(" ");
+        table.style.gridTemplateColumns = gridMatrix.join(' ');
       })
     } else {
-      targetTable.style.gridTemplateColumns = gridMatrix.join(" ");
+      targetTable.style.gridTemplateColumns = gridMatrix.join(' ');
     }
 
   }
@@ -335,9 +336,9 @@
 
     // Apply default width
     if (colType === 'segment') {
-      updateTableGrid(target,segmentDefault);
+      updateTableGrid(target, segmentDefault);
     } else {
-      updateTableGrid(target,metricDefault);
+      updateTableGrid(target, metricDefault);
     }
 
   }
@@ -370,7 +371,7 @@
       let type = col.getAttribute('data-col');
       let width = type === 'segment' 
         ? `${parseInt(col.offsetWidth, 10)}px`
-        : `minmax(24ch, ${parseInt(col.offsetWidth, 10) / (tableWidth - totalSegmentWidth) * 100}fr)`;
+        : `minmax(24ch,${parseInt(col.offsetWidth, 10) / (tableWidth - totalSegmentWidth) * 100}fr)`;
       updateTableGrid(col, width);
     });
   }
