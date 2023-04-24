@@ -172,6 +172,12 @@
     // Loop through previous cols
     prevCols.forEach(col => {
 
+      // Get index of target elem
+      let index = [...targetTable.children].indexOf(col);
+
+      // Store prev width
+      col.setAttribute('data-prev-width', gridMatrix[index]);
+
       // Apply fixed width to previous cols
       updateTableGrid(col, col.offsetWidth + 'px');
 
@@ -182,17 +188,12 @@
   // Unfreeze columns after resize
   const unfreezeCols = (e) => {
   
-
     // Get previous cols
     let cols = getPreviousUntil(target, '[data-table]');
 
-    // Get table width
-    let tableWidth = targetTable.offsetWidth;
-
-    // Apply relative width to previous cols
+    // Apply prev width to each column
     cols.forEach(col => {
-      let relWidth = parseInt(col.offsetWidth, 10) / tableWidth * 100 + '%';
-      updateTableGrid(col, relWidth);
+      updateTableGrid(col, col.getAttribute('data-prev-width'));
     });
   }
 
