@@ -58,7 +58,7 @@
         case action = 'new-session':
           if (!e.target.disabled) {
             e.target.setAttribute('disabled', true);
-            convertColsToRel();
+            convertColsToRel(tables[0]);
           }
           break;
       }
@@ -345,35 +345,25 @@
   }
 
   // Apply relative width to previous cols
-  const convertColsToRel = () => {
-    
-    // Get all columns
-    let cols = document.querySelectorAll('[data-col]');
+  const convertColsToRel = (table) => {
 
     // Get table width including overflow
-    let tableWidth = tables[0].scrollWidth;
+    let tableWidth = table.scrollWidth;
 
     // Set explicit width on table so col calc is accurate
-    tables[0].style.width = tableWidth + 'px';
+    tables.style.width = tableWidth + 'px';
 
-    // Get segment widths
-    let segmentWidths = Array.from(segments).map(function (segment) {
-      return segment.offsetWidth;
-    });
-
-    // Get sum of segment widths
-    let totalSegmentWidth = segmentWidths.reduce((accumulator, value) => {
-      return accumulator + value;
-    }, 0);
+    // Update gridMatrix based on target table
+    // Split column data string at each space not preceded by comma
+    let targetTableGrid = table.style.gridTemplateColumns;
+    gridMatrix = targetTableGrid.split(/(?<!,)\s/g);
 
     // Loop through cols and translate each to rel width
     // Then update grid matrix
-    cols.forEach(col => {
-      let type = col.getAttribute('data-col');
-      let width = type === 'segment' 
-        ? `${parseInt(col.offsetWidth, 10)}px`
-        : `minmax(24ch,${parseInt(col.offsetWidth, 10) / (tableWidth - totalSegmentWidth) * 100}fr)`;
-      updateTableGrid(col, width);
+    gridMatrix.forEach((width, index) => {
+      if (width.includes('px', -1)) {
+        gridMatrix[index] = `minmax(minmax(var(--table-col-min-width), ${parseInt(width, 10) / (tableWidth) * 100}fr)`;
+      }
     });
   }
 
