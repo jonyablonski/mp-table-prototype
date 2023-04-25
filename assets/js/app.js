@@ -203,6 +203,12 @@
     // Set targetTable to table report table if table function isn’t set
     if (fn) targetTable = tables[0];
 
+    // Get table width including overflow
+    // let tableWidth = targetTable.scrollWidth;
+
+    // Set explicit width on table so col calc is accurate
+    // targetTable.style.width = tableWidth + 'px';
+
     // Get index of target elem
     let index = [...targetTable.children].indexOf(target);
 
@@ -348,10 +354,10 @@
   const convertColsToRel = (table) => {
 
     // Get table width including overflow
-    let tableWidth = table.scrollWidth;
+    // let tableWidth = table.scrollWidth;
 
     // Set explicit width on table so col calc is accurate
-    tables.style.width = tableWidth + 'px';
+    // table.style.width = tableWidth + 'px';
 
     // Update gridMatrix based on target table
     // Split column data string at each space not preceded by comma
