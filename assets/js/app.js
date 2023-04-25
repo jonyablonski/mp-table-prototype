@@ -132,7 +132,10 @@
     document.addEventListener('mousemove', calcResize, false);
     
     // Resizing end
-    document.addEventListener('mouseup', function() {
+    document.addEventListener('mouseup', function(e) {
+
+      // Bail if target is not drag handle
+      if (!e.target.matches('[data-drag-handle]')) return;
 
       // Remove event listener
       document.removeEventListener('mousemove', calcResize, false);
@@ -197,7 +200,7 @@
       if (col.getAttribute('data-col') === 'segment') {
         width = col.getAttribute('data-prev-width');
       } else {
-        width = parseInt(col.offsetWidth, 10) / targetTable.offsetWidth * 100 + '%';
+        width = (col.offsetWidth / targetTable.offsetWidth) * 100 + '%';
       }
       updateTableGrid(col, width);
     });
