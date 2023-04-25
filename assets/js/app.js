@@ -165,7 +165,7 @@
 
   // Freeze columns on resize
   const freezeCols = (e) => {
-    
+
     // Get previous cols
     let prevCols = getPreviousUntil(target, '[data-table]');
 
@@ -188,13 +188,24 @@
   // Unfreeze columns after resize
   const unfreezeCols = (e) => {
   
+    targetTable.style.width = targetTable.scrollWidth + 'px';
+
     // Get previous cols
     let cols = getPreviousUntil(target, '[data-table]');
 
     // Apply prev width to each column
     cols.forEach(col => {
-      updateTableGrid(col, col.getAttribute('data-prev-width'));
+      let width;
+      if (col.getAttribute('data-col') === 'segment') {
+        width = col.getAttribute('data-prev-width');
+      } else {
+        width = parseInt(col.offsetWidth, 10) / targetTable.offsetWidth * 100 + '%';
+      }
+      updateTableGrid(col, width);
     });
+
+    
+    console.log(targetTable.scrollWidth)
   }
 
   // Update Table Grid
@@ -353,12 +364,6 @@
   // Apply relative width to previous cols
   const convertColsToRel = (table) => {
 
-    // Get table width including overflow
-    // let tableWidth = table.scrollWidth;
-
-    // Set explicit width on table so col calc is accurate
-    // table.style.width = tableWidth + 'px';
-
     // Update gridMatrix based on target table
     // Split column data string at each space not preceded by comma
     let targetTableGrid = table.style.gridTemplateColumns;
@@ -368,7 +373,7 @@
     // Then update grid matrix
     gridMatrix.forEach((width, index) => {
       if (width.includes('px', -1)) {
-        gridMatrix[index] = `minmax(minmax(var(--table-col-min-width), ${parseInt(width, 10) / (tableWidth) * 100}fr)`;
+        gridMatrix[index] = `minmax(var(--table-col-min-width), ${parseInt(width, 10) / (targetTable.offsetWidth) * 100}fr)`;
       }
     });
   }
