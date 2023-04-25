@@ -187,8 +187,6 @@
 
   // Unfreeze columns after resize
   const unfreezeCols = (e) => {
-  
-    targetTable.style.width = targetTable.scrollWidth + 'px';
 
     // Get previous cols
     let cols = getPreviousUntil(target, '[data-table]');
@@ -203,9 +201,6 @@
       }
       updateTableGrid(col, width);
     });
-
-    
-    console.log(targetTable.scrollWidth)
   }
 
   // Update Table Grid
