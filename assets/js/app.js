@@ -134,17 +134,17 @@
     // Resizing end
     document.addEventListener('mouseup', function(e) {
 
-      // Bail if target is not drag handle
-      if (!e.target.matches('[data-drag-handle]')) return;
-
       // Remove event listener
       document.removeEventListener('mousemove', calcResize, false);
 
-      // Unfreeze previous cols
-      unfreezeCols(target);
-
       // Update resizing state on table
       targetTable.classList.remove('is-resizing');
+
+      // Bail if target is not drag handle
+      if (!e.target.matches('[data-drag-handle]')) return;
+
+      // Unfreeze previous cols
+      unfreezeCols(target);
 
     }, false);
   
