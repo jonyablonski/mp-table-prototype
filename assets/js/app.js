@@ -369,13 +369,12 @@
 
     // Set explicit width on table
     table.style.width = table.scrollWidth + 'px';
-
     // Loop through cols and translate each to rel width
     // Then update grid matrix
     gridMatrix.forEach((width, index) => {
       if (width.includes('px', -1)) {
         width = parseInt(width, 10);
-        gridMatrix[index] = `minmax(var(--table-col-min-width), ${parseInt((width / table.offsetWidth) * 100, 10)}%)`;
+        gridMatrix[index] = `minmax(var(--table-col-min-width), ${(width / table.offsetWidth) * 100}%)`;
         console.log(gridMatrix)
       }
     });
